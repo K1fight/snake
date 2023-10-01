@@ -3,21 +3,29 @@ package UI;
 import UI.Buttons.StartButton;
 import javax.swing.*;
 import java.awt.*;
+import java.util.Objects;
 
 public class Frame {
+    private static Frame frame;
+    public static Frame getFrame(){
+        if(frame==null){
+            frame = new Frame();
+        }
+        return frame;
+    }
     JFrame mainFrame;
     JPanel mainPage,Game;
     StartButton button1;
     JLabel background;
-    public Frame(){
+    private Frame(){
 
         mainFrame = new JFrame("Snake");
-        mainFrame.setPreferredSize(new Dimension(1280,720));
+        mainFrame.setPreferredSize(new Dimension(1280,750));
         mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        mainFrame.setResizable(false);
 
 
-
-        game();
+        mainPageConfiguration();
 
 
 
@@ -36,13 +44,19 @@ public class Frame {
         mainFrame.add(mainPage);
         buttons();
     }
-    private void buttons(){
-       button1 = new StartButton();
-       background.add(button1);
-
+    private void buttons() {
+        button1 = new StartButton();
+        background.add(button1);
     }
-    private void game(){
-        Game = new GamePage();
+    public void removeAll(){
+        mainFrame.getContentPane().removeAll();
+    }
+    public void add(Component c){
+        mainFrame.getContentPane().add(c);
+    }
+    public void refresh(){
+        mainFrame.revalidate();
+        mainFrame.repaint();
     }
 
 
